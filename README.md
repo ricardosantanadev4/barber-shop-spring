@@ -32,18 +32,20 @@ A seguir, o diagrama de classes representando as entidades **Client** e **Schedu
 
 ```mermaid
 classDiagram
-    class Client {
-        +number id
-        +string nome
-        +string email
-        +string telefone
+     class Client {
+        +Long id
+        +String nome
+        +String email
+        +String telefone
+        +List<Schedule> agendamentos
     }
 
-    class Schedule {
-        +number id
-        +string inicio
-        +string termino
-        +string cliente
+     class Schedule {
+        +Long id
+        +LocalDate data
+        +LocalTime horaInicio
+        +LocalTime horaFim
+        +Long cliente
     }
 
     Client "1" --> "0..*" Schedule : tem
