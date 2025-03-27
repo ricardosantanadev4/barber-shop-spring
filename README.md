@@ -21,28 +21,6 @@ Este projeto é um **CRUD de agendamento para uma barbearia**, onde os clientes 
 
 O sistema tem duas entidades principais: **Client** (Cliente) e **Schedule** (Agendamento), com os seguintes atributos:
 
-### Entidade **Client** (Cliente)
-
-```json
-{
-  "id": "number",
-  "nome": "string",
-  "email": "string",
-  "telefone": "string"
-}
-```
-
-### Entidade **Schedule** (Agendamento)
-
-```json
-{
-  "id": "number",
-  "inicio": "string",
-  "termino": "string",
-  "cliente": "string"
-}
-```
-
 ### Relacionamento entre as Entidades
 
 - Um **cliente** pode ter **um ou vários agendamentos**.
