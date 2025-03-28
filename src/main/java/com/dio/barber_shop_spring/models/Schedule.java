@@ -3,6 +3,8 @@ package com.dio.barber_shop_spring.models;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,5 +31,6 @@ public class Schedule {
 
     @JoinColumn(name = "cliente_id")
     @ManyToOne
+    @JsonBackReference
     private Client cliente;
 }
