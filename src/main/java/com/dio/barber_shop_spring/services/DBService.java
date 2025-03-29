@@ -3,6 +3,7 @@ package com.dio.barber_shop_spring.services;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -24,7 +25,33 @@ public class DBService {
     }
 
     public boolean instanciaDB() {
+        Schedule sc = new Schedule();
+
+
         int numeroDeRegistros = 20;
+
+        List<LocalTime> inicioList = new ArrayList<>(
+                Arrays.asList(
+                        LocalTime.of(8, 00),
+                        LocalTime.of(9, 00),
+                        LocalTime.of(10, 00),
+                        LocalTime.of(11, 00),
+                        LocalTime.of(14, 00),
+                        LocalTime.of(15, 00),
+                        LocalTime.of(16, 00),
+                        LocalTime.of(17, 00)));
+
+        List<LocalTime> fimList = new ArrayList<>(
+                Arrays.asList(
+                        LocalTime.of(9, 00),
+                        LocalTime.of(10, 00),
+                        LocalTime.of(11, 00),
+                        LocalTime.of(12, 00),
+                        LocalTime.of(15, 00),
+                        LocalTime.of(16, 00),
+                        LocalTime.of(17, 00),
+                        LocalTime.of(18, 00)));
+
         for (int i = 0; i < numeroDeRegistros; i++) {
             Client client = new Client(
                     null,
@@ -33,14 +60,19 @@ public class DBService {
                     "81999999999", null);
 
             // Ajustando para garantir valores válidos para a hora e segundo
-            int hora = i % 24; // Garante que a hora fique entre 0 e 23
-            int minuto = i % 60; // Garante que o minuto fique entre 0 e 59
             int segundo = i % 60; // Garante que o segundo fique entre 0 e 59
+
+            // Pegando o horário da lista de forma cíclica
+            LocalTime inicio = inicioList.get(i % inicioList.size());
+
+            LocalTime fim = fimList.get(i % inicioList.size());
 
             Schedule schedule = new Schedule(
                     null,
-                    LocalTime.of(hora, minuto),
-                    LocalTime.of((hora + 1) % 24, minuto), // Evita ultrapassar 23h
+                    inicio,
+                    inicioList,
+                    fim,
+                    fimList,
                     LocalDateTime.of(2025, 1, 1 + (i % 28), 0, 0, segundo),
                     client);
 
