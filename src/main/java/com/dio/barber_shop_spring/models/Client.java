@@ -2,7 +2,7 @@ package com.dio.barber_shop_spring.models;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -23,13 +23,13 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String nome;
     private String email;
     private String telefone;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference
     private List<Schedule> agendamentos;
-    
+
 }
