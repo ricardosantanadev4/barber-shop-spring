@@ -1,5 +1,7 @@
 package com.dio.barber_shop_spring.services;
 
+import java.time.LocalTime;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,16 +22,26 @@ public class ScheduleService {
     }
 
     public Schedule createSchedule(Schedule schedule) {
-        if (this.verifyScheduleExists(schedule)) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Horário indisponível! Escolha outro horário.");
-        }
-
+        this.verifyScheduleExists(schedule);
+        this.validarHorario(schedule.getInicio(), schedule.getFim());
         return this.scheduleRepository.save(schedule);
     }
 
     public boolean verifyScheduleExists(Schedule schedule) {
-        return this.scheduleRepository.existsByInicioOrFimOrData(schedule.getInicio(), schedule.getFim(),
-                schedule.getData());
+        if (this.scheduleRepository.existsByInicioOrFimOrData(schedule.getInicio(), schedule.getFim(),
+                schedule.getData())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Horário indisponível! Escolha outro horário.");
+        }
+
+        return true;
+    }
+
+    public boolean validarHorario(LocalTime inicio, LocalTime fim) {
+        LocalTime horarioEsperado = inicio.plusHours(1); // Adiciona 1 hora ao horário inicial
+        if (!fim.equals(horarioEsperado)) {
+            throw new IllegalArgumentException("Horário inválido! O horário permitido é " + horarioEsperado);
+        }
+        return fim.equals(horarioEsperado);
     }
 
     public Page<Schedule> agedamentosPaginados(int pageIndex, int pageSize, String filter) {
