@@ -1,8 +1,7 @@
 package com.dio.barber_shop_spring.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -27,13 +26,8 @@ public class Schedule {
     private Long id;
 
     private LocalTime inicio;
-
-    private List<LocalTime> inicioList;
-
     private LocalTime fim;
-    private List<LocalTime> fimList;
-
-    private LocalDateTime data;
+    private LocalDate data;
 
     @JoinColumn(name = "cliente_id")
     @ManyToOne

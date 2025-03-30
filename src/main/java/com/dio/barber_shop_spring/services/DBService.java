@@ -1,6 +1,6 @@
 package com.dio.barber_shop_spring.services;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,8 +25,6 @@ public class DBService {
     }
 
     public boolean instanciaDB() {
-        Schedule sc = new Schedule();
-
 
         int numeroDeRegistros = 20;
 
@@ -59,9 +57,6 @@ public class DBService {
                     "email" + i + "@email.com",
                     "81999999999", null);
 
-            // Ajustando para garantir valores válidos para a hora e segundo
-            int segundo = i % 60; // Garante que o segundo fique entre 0 e 59
-
             // Pegando o horário da lista de forma cíclica
             LocalTime inicio = inicioList.get(i % inicioList.size());
 
@@ -70,10 +65,8 @@ public class DBService {
             Schedule schedule = new Schedule(
                     null,
                     inicio,
-                    inicioList,
                     fim,
-                    fimList,
-                    LocalDateTime.of(2025, 1, 1 + (i % 28), 0, 0, segundo),
+                    LocalDate.of(2025, 1, 1 + (i % 28)),
                     client);
 
             List<Schedule> schedules = new ArrayList<>();

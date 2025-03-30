@@ -17,7 +17,7 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public Page<Client> listarClientesPaginados(int pageIndex, int pageSize, String filter) {
+    public Page<Client> clientesPaginados(int pageIndex, int pageSize, String filter) {
         Pageable pageable = PageRequest.of(pageIndex, pageSize);
 
         if (this.verificarStrigVaziaOuNula(filter)) {

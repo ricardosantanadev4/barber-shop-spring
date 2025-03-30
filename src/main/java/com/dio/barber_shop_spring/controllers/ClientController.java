@@ -22,10 +22,9 @@ public class ClientController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Client>> listarClientesPaginados(@RequestParam(defaultValue = "0") int pageIndex,
+    public ResponseEntity<Page<Client>> clientesPaginados(@RequestParam(defaultValue = "0") int pageIndex,
             @RequestParam(defaultValue = "10") int pageSize , @RequestParam(required = false) String filter) {
-        System.out.println("Page Index: " + pageIndex + "Page Size: " + pageSize);
-        Page<Client> clientPage = this.clientService.listarClientesPaginados(pageIndex, pageSize, filter);
+        Page<Client> clientPage = this.clientService.clientesPaginados(pageIndex, pageSize, filter);
         return new ResponseEntity<Page<Client>>(clientPage, HttpStatus.OK);
     }
 
