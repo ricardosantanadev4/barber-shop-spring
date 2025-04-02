@@ -2,7 +2,7 @@ package com.dio.barber_shop_spring.models;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -17,6 +17,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+// property = "id")
 @NoArgsConstructor
 public class Client {
 
@@ -29,7 +31,7 @@ public class Client {
     private String telefone;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonIgnore
     private List<Schedule> agendamentos;
 
 }

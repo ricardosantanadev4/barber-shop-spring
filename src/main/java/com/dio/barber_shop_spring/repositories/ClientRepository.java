@@ -8,9 +8,10 @@ import org.springframework.data.repository.query.Param;
 
 import com.dio.barber_shop_spring.models.Client;
 
-public interface ClientRepository extends JpaRepository<Client, Long>{
+public interface ClientRepository extends JpaRepository<Client, Long> {
+        boolean existsByNomeOrEmail(String nome, String email);
 
-     @Query("SELECT u FROM Client u WHERE " +
+        @Query("SELECT u FROM Client u WHERE " +
                         "LOWER(u.nome) LIKE LOWER(CONCAT('%', :filter, '%')) OR " +
                         "LOWER(u.email) LIKE LOWER(CONCAT('%', :filter, '%')) OR " +
                         "LOWER(u.telefone) LIKE LOWER(CONCAT('%', :filter, '%')) OR " +

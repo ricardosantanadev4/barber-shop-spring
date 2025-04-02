@@ -26,6 +26,7 @@ public class ScheduleService {
     public ScheduleService(ScheduleRepository scheduleRepository, ClientRepository clientRepository) {
         this.scheduleRepository = scheduleRepository;
         this.clientRepository = clientRepository;
+
     }
 
     public Schedule createSchedule(Schedule schedule) {
@@ -90,7 +91,7 @@ public class ScheduleService {
 
         // Criar o Page<Schedule>
         Page<Schedule> schedulePage = new PageImpl<>(paginatedSchedules, schedulePageable, schedules.size());
-        
+
         return schedulePage;
     }
 
