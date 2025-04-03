@@ -1,5 +1,7 @@
 package com.dio.barber_shop_spring.services;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -42,6 +44,15 @@ public class ClientService {
 
     public boolean verificarStrigVaziaOuNula(String string) {
         return string == null || string.trim().isEmpty();
+    }
+
+    public Client getClientById(Long id) {
+        Optional<Client> client = this.clientRepository.findById(id);
+        if (client.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Cliente não encontrado com id: " + id + " Fornecido.");
+        }
+        return client.get();
     }
 
 }
